@@ -19,7 +19,7 @@ export default function JourneyPage() {
       .trim();
   };
 
-  // ✅ GENERATE JOURNEY
+  //  GENERATE JOURNEY
   const generateJourney = async () => {
     if (!age || !state) return;
 
@@ -38,7 +38,7 @@ Keep it clean and structured.
 
     const response = await getAIResponse(prompt);
 
-    // ✅ PARSE STEPS
+    // PARSE STEPS
     const parsed = response
       .split(/\d+\.\s/)
       .filter((step) => step.trim() !== "")
@@ -107,7 +107,7 @@ Keep it clean and structured.
           </div>
         )}
 
-        {/* 🔥 RESULTS */}
+        {/* RESULTS */}
         <div className="mt-10 space-y-6">
 
           {steps.map((step, i) => {
@@ -115,7 +115,7 @@ Keep it clean and structured.
             const title = parts[0];
             const desc = parts.slice(1).join("-");
 
-            // ⭐ INTRO CARD (FIRST STEP)
+            //  INTRO CARD (FIRST STEP)
             if (i === 0) {
               return (
                 <motion.div
