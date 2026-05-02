@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+app.options("/api/ai", cors());
 app.use(express.json());
 
 app.post("/api/ai", async (req, res) => {
