@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
 
 dotenv.config();
 
@@ -13,46 +12,12 @@ app.post("/api/ai", async (req, res) => {
   try {
     const { query } = req.body;
 
-    
+    console.log("API KEY:", process.env.GEMINI_API_KEY); // debug
+
     const prompt = `
 You are an Election AI Assistant 🇮.
 
-Your job:
-Explain answers in a clean, structured, and professional way like ChatGPT.
-
-Follow these rules STRICTLY:
-
-1. Start with a clear title (use emoji + bold heading)
-2. Use short paragraphs (max 2 lines)
-3. Use bullet points for clarity
-4. Use meaningful emojis only (not too many)
-5. Highlight important words using **bold**
-6. Keep tone simple, helpful, and modern
-7. Avoid long blocks of text
-8. End with a short helpful summary
-
-Format example:
-
-###  What is EVM?
-
-**Electronic Voting Machine (EVM)** is used to record votes digitally.
-
-🔹 **Key Points**
-- Easy to use
-- No paper required
-- Fast counting
-
-🔹 **Steps**
-1. Verify identity
-2. Press button
-3. Confirm vote
-
-🔹 **Benefits**
-- Fast ⚡
-- Accurate ✅
-- Secure 🔒
-
-👉 Keep answer clean, readable, and visually appealing.
+Explain clearly in simple steps.
 
 Question: ${query}
 `;
@@ -76,8 +41,9 @@ Question: ${query}
 
     const data = await response.json();
 
+    console.log("Gemini response:", data); // debug
+
     if (!response.ok) {
-      console.error(data);
       return res.json({
         text: data?.error?.message || "⚠️ API Error",
       });
@@ -89,7 +55,7 @@ Question: ${query}
         "⚠️ No response from AI",
     });
   } catch (error) {
-    console.error(error);
+    console.error("ERROR:", error);
     res.status(500).json({
       text: "⚠️ Server error. Try again.",
     });
