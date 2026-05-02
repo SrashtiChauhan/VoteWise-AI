@@ -10,19 +10,19 @@ export default function ChatPage() {
 
   const [currentId, setCurrentId] = useState(null);
 
-  // 💾 Save chats
+  //  Save chats
   useEffect(() => {
     localStorage.setItem("chats", JSON.stringify(chats));
   }, [chats]);
 
-  // ➕ New chat
+  // New chat
   const newChat = () => {
     const chat = {
       id: Date.now(),
       title: "New Chat",
       messages: [
         {
-          text: "👋 Ask me about elections, EVM, voting 🇮🇳",
+          text: "👋 Ask me about elections, EVM, voting 🇮",
           sender: "bot",
         },
       ],
@@ -32,7 +32,7 @@ export default function ChatPage() {
     setCurrentId(chat.id);
   };
 
-  // ❌ Delete chat
+  //  Delete chat
   const deleteChat = (id) => {
     setChats((prev) => prev.filter((c) => c.id !== id));
     if (currentId === id) setCurrentId(null);
